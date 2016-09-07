@@ -3,6 +3,7 @@ package tp.persistence.direct.hibernate;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import tp.data.entity.Devise;
 import tp.data.entity.Pays;
@@ -13,32 +14,69 @@ public class DAODeviseHibernate extends AbstractHibernateDAO implements DAODevis
 
 	@Override
 	public void deleteDevise(String codeDevise) {
-		// TODO Auto-generated method stub
-
+		Session session = this.currentSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Devise dev = (Devise) this.currentSession().get(Devise.class, codeDevise);
+			if(dev!=null)
+			   session.delete(dev);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			System.err.println(e.getMessage());
+			throw e;
+		}
 	}
 
 	@Override
 	public void removeDevise(Devise dev) {
-		// TODO Auto-generated method stub
-
+		Session session = this.currentSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			session.delete(dev);
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+			System.err.println(e.getMessage());
+			throw e;
+		}
 	}
 
 	@Override
 	public Devise updateDevise(Devise dev) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = this.currentSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			//session.update(dev); ou bien session.saveOrUpdate(dev); ou bien 
+			dev=(Devise)session.merge(dev);
+			tx.commit();
+			return dev;
+		} catch (Exception e) {
+			tx.rollback();
+			System.err.println(e.getMessage());
+			throw e;
+		}
 	}
 
 	@Override
 	public Devise getDeviseByCode(String codeDevise) {
-		// TODO Auto-generated method stub
-		return null;
+		return  (Devise) this.currentSession().get(Devise.class, codeDevise);
 	}
 
 	@Override
 	public Devise persistNewDevise(Devise dev) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = this.currentSession();
+		Transaction tx = session.beginTransaction();
+		try {
+			Object pk = session.save(dev); 
+			//session.persist(dev);
+			tx.commit();
+			return dev;
+		} catch (Exception e) {
+			tx.rollback();
+			System.err.println(e.getMessage());
+			throw e;
+		}
 	}
 
 	@Override
@@ -49,10 +87,12 @@ public class DAODeviseHibernate extends AbstractHibernateDAO implements DAODevis
 				.uniqueResult();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Devise> getAllDevise() {
-		// TODO Auto-generated method stub
-		return null;
+		return  (List<Devise>) this.currentSession()
+				.createQuery("select d from Devise d")
+				.list();
 	}
 
 	@SuppressWarnings("unchecked")

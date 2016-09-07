@@ -6,12 +6,14 @@ import java.util.List;
 import javax.inject.Named;
 
 import org.mycontrib.generic.persistence.GenericDaoJpaImpl;
+import org.springframework.transaction.annotation.Transactional;
 
 import tp.data.entity.Devise;
 import tp.persistence.spring.dao.DaoDevise;
 
 @Named
-public class DaoDeviseJpa extends GenericDaoJpaImpl<Devise,String> implements DaoDevise {
+@Transactional
+public class DaoDeviseSpringJpa extends GenericDaoJpaImpl<Devise,String> implements DaoDevise {
 
 	
 	@Override

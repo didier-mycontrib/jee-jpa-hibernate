@@ -1,5 +1,5 @@
 
-package tp.persistence.spring.test;
+package tp.persistence.spring.jpa.test;
 
 import javax.inject.Inject;
 
@@ -15,7 +15,7 @@ import tp.persistence.spring.dao.DaoDevise;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/spring/springContext.xml"})
-public class TestDaoDevises { 
+public class TestDaoDeviseSpringJpa { 
 
     @Inject
 	private DaoDevise daoDevise = null; // dao a tester

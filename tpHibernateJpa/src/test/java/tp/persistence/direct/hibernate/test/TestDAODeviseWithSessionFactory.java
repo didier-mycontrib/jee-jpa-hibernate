@@ -32,5 +32,20 @@ public class TestDAODeviseWithSessionFactory extends TestWithSessionFactory {
 	      	    Assert.fail(ex.getMessage());
 	      	}
 	   }
+	
+	@Test
+	   public void test_updateDevise() {
+	     try{
+	        System.out.println("test_updateDevise");
+	        Devise d = daoDevise.getDeviseByName("euro");
+	        d.setChange(d.getChange()*1.05);
+	        Devise updatedDev = daoDevise.updateDevise(d);
+	        System.out.println("monnaie euro (apres * 1.05) : " + updatedDev);
+	        Assert.assertTrue(d.getMonnaie().equals("euro"));
+	        }catch(Exception /*RuntimeException*/ ex){
+	      	    System.err.println(ex.getMessage());
+	      	    Assert.fail(ex.getMessage());
+	      	}
+	   }
 
 }

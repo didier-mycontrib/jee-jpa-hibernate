@@ -31,6 +31,7 @@ http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 		
 		<class>tp.data.entity.Devise</class>
 		<class>tp.data.entity.Pays</class>
+		<class>tp.data.entity.Compte</class>
 		
 		<properties>
 		    <property name="javax.persistence.provider" value="org.hibernate.jpa.HibernatePersistenceProvider" />

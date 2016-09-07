@@ -20,32 +20,60 @@ public class DAODeviseJpa implements DAODevise , DAOJpa{
 
 	@Override
 	public void deleteDevise(String codeDevise) {
-		// TODO Auto-generated method stub
-
+		try {
+			entityManager.getTransaction().begin();
+			Devise dev = entityManager.find(Devise.class,codeDevise);
+			if(dev!=null)
+				entityManager.remove(dev);
+			entityManager.getTransaction().commit();
+		} catch (RuntimeException e) {
+			entityManager.getTransaction().rollback();
+			System.err.println(e.getMessage());
+		}
 	}
 
 	@Override
 	public void removeDevise(Devise dev) {
-		// TODO Auto-generated method stub
-
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.remove(dev);
+			entityManager.getTransaction().commit();
+		} catch (RuntimeException e) {
+			entityManager.getTransaction().rollback();
+			System.err.println(e.getMessage());
+		}
 	}
 
 	@Override
 	public Devise updateDevise(Devise dev) {
-		// TODO Auto-generated method stub
-		return null;
+		Devise updatedDev = null;
+		try {
+			entityManager.getTransaction().begin();
+			updatedDev = entityManager.merge(dev);
+			entityManager.getTransaction().commit();
+		} catch (RuntimeException e) {
+			entityManager.getTransaction().rollback();
+			System.err.println(e.getMessage());
+		}
+		return updatedDev;
 	}
 
 	@Override
 	public Devise getDeviseByCode(String codeDevise) {
-		// TODO Auto-generated method stub
-		return null;
+		return entityManager.find(Devise.class,codeDevise);
 	}
 
 	@Override
 	public Devise persistNewDevise(Devise dev) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			entityManager.getTransaction().begin();
+			entityManager.persist(dev);
+			entityManager.getTransaction().commit();
+		} catch (RuntimeException e) {
+			entityManager.getTransaction().rollback();
+			System.err.println(e.getMessage());
+		}
+		return dev;
 	}
 
 	@Override
@@ -58,8 +86,9 @@ public class DAODeviseJpa implements DAODevise , DAOJpa{
 
 	@Override
 	public List<Devise> getAllDevise() {
-		// TODO Auto-generated method stub
-		return null;
+		return  this.entityManager
+				.createQuery("select d from Devise d",Devise.class)
+				.getResultList();
 	}
 
 	@Override
