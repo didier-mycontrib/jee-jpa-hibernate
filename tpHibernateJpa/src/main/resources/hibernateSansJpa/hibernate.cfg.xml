@@ -34,9 +34,13 @@
 		
 		<property name="show_sql">false</property>
 		
+		<property name="hibernate.current_session_context_class">thread</property> 
+	
+		
 		<!-- Mapping files -->
 		<mapping class="tp.data.entity.Devise" />
-		<!-- ou bien (sans annotation , avec xml):  <mapping resource="hibernateSansJpa/hbm/Devise.hbm.xml" /> -->
+		<!-- ou bien (sans annotation , avec xml):  -->
+		<!-- <mapping resource="hibernateSansJpa/hbm/Devise.hbm.xml" /> -->
 		
 		<!-- <mapping resource="hbm/Xyz.hbm.xml" /> -->
 		<!-- mapping classe java - table -->

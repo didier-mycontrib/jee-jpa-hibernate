@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.hibernate.Session;
+
 import tp.data.entity.Devise;
 import tp.data.entity.Pays;
 import tp.persistence.direct.dao.DAODevise;
@@ -78,10 +80,20 @@ public class DAODeviseJpa implements DAODevise , DAOJpa{
 
 	@Override
 	public Devise getDeviseByName(String deviseName) {
+		/*
+		Session session= (Session) entityManager.getDelegate();
+		
+		return  (Devise)session
+				.createQuery("select d from Devise d where d.monnaie = :deviseName")
+				.setParameter("deviseName",deviseName)
+				.uniqueResult();
+		*/
+		
 		return  this.entityManager
 				.createQuery("select d from Devise d where d.monnaie = :deviseName",Devise.class)
 				.setParameter("deviseName",deviseName)
 				.getSingleResult();
+				
 	}
 
 	@Override

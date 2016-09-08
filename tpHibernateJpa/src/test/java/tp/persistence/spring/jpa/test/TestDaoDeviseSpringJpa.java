@@ -17,7 +17,7 @@ import tp.persistence.spring.dao.DaoDevise;
 @ContextConfiguration(locations={"/spring/springContext.xml"})
 public class TestDaoDeviseSpringJpa { 
 
-    @Inject
+    @Inject // de CDI ou bien @Autowired de Spring
 	private DaoDevise daoDevise = null; // dao a tester
 	
 	

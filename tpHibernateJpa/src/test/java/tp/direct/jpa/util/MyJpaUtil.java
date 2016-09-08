@@ -23,7 +23,8 @@ public class MyJpaUtil {
 		    configOverrides.put("javax.persistence.jdbc.password","");
 		    configOverrides.put("javax.persistence.jdbc.url","jdbc:h2:~/devise_db");
 		    emf =
-		        Persistence.createEntityManagerFactory("myPersistenceUnit", configOverrides);
+		        Persistence.createEntityManagerFactory("myPersistenceUnit", 
+		        		                                configOverrides);
 		    }
 		return emf;
 	}

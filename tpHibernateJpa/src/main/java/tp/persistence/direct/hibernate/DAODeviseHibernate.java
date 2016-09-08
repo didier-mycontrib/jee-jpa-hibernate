@@ -81,10 +81,13 @@ public class DAODeviseHibernate extends AbstractHibernateDAO implements DAODevis
 
 	@Override
 	public Devise getDeviseByName(String deviseName) {
-		return  (Devise) this.currentSession()
+		Transaction tx = currentSession().beginTransaction();
+		Devise d =  (Devise) this.currentSession()
 				.createQuery("select d from Devise d where d.monnaie = :deviseName")
 				.setParameter("deviseName",deviseName)
 				.uniqueResult();
+		tx.commit();
+		return d;
 	}
 
 	@SuppressWarnings("unchecked")

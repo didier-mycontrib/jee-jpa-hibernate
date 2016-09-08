@@ -22,7 +22,7 @@ depuis la version 3.2 Hibernate peut se configurer et se programmer de multiples
        - A l'epoque de JPA 2, il n'y a plus beaucoup de fonctionnalites "Hibernate" qui ne sont pas
          accessibles via "EntityManager" et la configuration associee
          
-       - D'autre part en codant "Session session = (Session) entityManager.getProvider(); " 
+       - D'autre part en codant "Session session = (Session) entityManager.getDelegate(); " 
          on peut ecrire 85% du code en s'appuyant sur le standard "JPA/EntityManager" 
             et 15% du code en s'appuyant en direct sur l'implementation interne d'Hibernate
             
