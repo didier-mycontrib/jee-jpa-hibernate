@@ -207,7 +207,7 @@
 	
 	<plugins>
 	<!-- a lancer via mvn hibernate4:export -->
-	<!-- 
+	
      <plugin>
     	<groupId>de.juplo</groupId>
     	<artifactId>hibernate4-maven-plugin</artifactId>
@@ -223,7 +223,7 @@
 					<target>none</target>
 			 </configuration>
      </plugin>
-     -->
+    
 
  <!-- configuration (enventuellement heritee) pour compilation en java 7ou8 -->
 			<plugin>

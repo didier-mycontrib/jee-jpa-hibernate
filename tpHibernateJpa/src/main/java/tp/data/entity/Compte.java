@@ -1,10 +1,14 @@
 package tp.data.entity;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Compte {
@@ -14,7 +18,12 @@ public class Compte {
 	private Long numero;
 	private String label;
 	private Double solde;
-	//...
+
+	@OneToMany(mappedBy="compte")
+	private List<Operation> operations;
+	
+	@ManyToMany(mappedBy="comptes") 
+	private List<Client> clients;
 	
 
 	@Override
@@ -54,6 +63,26 @@ public class Compte {
 	}
 	public void setSolde(Double solde) {
 		this.solde = solde;
+	}
+
+
+	public List<Operation> getOperations() {
+		return operations;
+	}
+
+
+	public void setOperations(List<Operation> operations) {
+		this.operations = operations;
+	}
+
+
+	public List<Client> getClients() {
+		return clients;
+	}
+
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
 	}
 	
 	

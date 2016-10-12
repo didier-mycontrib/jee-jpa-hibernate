@@ -21,10 +21,19 @@ public class TestDAODeviseWithEntityManager extends TestWithEntityManager {
 	     try{
 	        System.out.println("test_updateDevise");
 	        Devise d = daoDevise.getDeviseByName("euro");
+	        
+	        double ancienChange = d.getChange();
+	        
 	        d.setChange(d.getChange()*1.05);
 	        Devise updatedDev = daoDevise.updateDevise(d);
 	        System.out.println("monnaie euro (apres * 1.05) : " + updatedDev);
 	        Assert.assertTrue(d.getMonnaie().equals("euro"));
+	        
+	        this.entityManager.clear();//car ici test sans spring
+	        
+	        Devise d_apres_relecture = daoDevise.getDeviseByName("euro");
+	        Assert.assertEquals(ancienChange * 1.05, d_apres_relecture.getChange(), 0.001);
+	        
 	        }catch(Exception /*RuntimeException*/ ex){
 	      	    System.err.println(ex.getMessage());
 	      	    Assert.fail(ex.getMessage());

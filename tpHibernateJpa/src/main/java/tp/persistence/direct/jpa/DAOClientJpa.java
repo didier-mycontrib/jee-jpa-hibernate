@@ -67,8 +67,11 @@ public class DAOClientJpa implements DAOClient , DAOJpa {
 
 	@Override
 	public List<Client> rechercherTousLesClients(){
-		return  this.entityManager
+		/*return  this.entityManager
 				.createQuery("select c from Client c",Client.class)
+				.getResultList();*/
+		return  this.entityManager
+				.createNamedQuery("client.findAll",Client.class)
 				.getResultList();
 	}
 	
